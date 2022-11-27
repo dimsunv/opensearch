@@ -1,0 +1,7 @@
+server.name: os_logstash
+http.host: "0.0.0.0"
+
+
+# Encrypt traffic between Logstash and Opensearch
+opensearch.ssl.certificateAuthorities: ["/usr/share/logstash/config/certificates/ca/ca.pem"]
+opensearch.ssl.verificationMode: full
