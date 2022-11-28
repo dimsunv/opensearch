@@ -130,7 +130,7 @@ services:
       - "./logstash.conf:/usr/share/logstash/pipeline/logstash.conf"
       - "./certs:/usr/share/logstash/config/certificates:ro"
     environment:
-      OPENSEARCH_HOSTS: '["https://os01:9200"]'
+      OPENSEARCH_HOSTS: '["https://os00:9200"]'
 
 volumes:
   os-data0:

@@ -1,2 +1,1 @@
-node.name: "os-logstash"
 http.host: "0.0.0.0"
