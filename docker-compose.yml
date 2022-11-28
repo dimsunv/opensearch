@@ -24,6 +24,7 @@ services:
         hard: -1
     volumes:
       - "./opensearch.yml:/usr/share/opensearch/config/opensearch.yml"
+      - "./internal_users.yml:/usr/share/opensearch/config/opensearch-security/internal_users.yml"
       - "os-data0:/usr/share/opensearch/data"
       - "./certs:/usr/share/opensearch/config/certificates:ro"
     ports:
@@ -55,6 +56,7 @@ services:
         hard: -1
     volumes:
       - "./opensearch.yml:/usr/share/opensearch/config/opensearch.yml"
+      - "./internal_users.yml:/usr/share/opensearch/config/opensearch-security/internal_users.yml"
       - "os-data1:/usr/share/opensearch/data"
       - "./certs:/usr/share/opensearch/config/certificates:ro"
     networks:
@@ -84,6 +86,7 @@ services:
         hard: -1
     volumes:
       - "./opensearch.yml:/usr/share/opensearch/config/opensearch.yml"
+      - "./internal_users.yml:/usr/share/opensearch/config/opensearch-security/internal_users.yml"
       - "os-data2:/usr/share/opensearch/data"
       - "./certs:/usr/share/opensearch/config/certificates:ro"
     networks:
@@ -113,6 +116,7 @@ services:
         hard: -1
     volumes:
       - "./opensearch.yml:/usr/share/opensearch/config/opensearch.yml"
+      - "./internal_users.yml:/usr/share/opensearch/config/opensearch-security/internal_users.yml"
       - "os-data3:/usr/share/opensearch/data"
       - "./certs:/usr/share/opensearch/config/certificates:ro"
     networks:
