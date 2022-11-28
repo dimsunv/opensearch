@@ -17,7 +17,6 @@ plugins.security.ssl.transport.enforce_hostname_verification: false
 plugins.security.authcz.admin_dn:
   - 'CN=ADMIN,O=NETOLOGY,L=SPB,ST=SPB,C=RU'
 plugins.security.nodes_dn:
-  - 'CN=os00,O=NETOLOGY,L=SPB,ST=SPB,C=RU'
   - 'CN=os01,O=NETOLOGY,L=SPB,ST=SPB,C=RU'
   - 'CN=os02,O=NETOLOGY,L=SPB,ST=SPB,C=RU'
   - 'CN=os03,O=NETOLOGY,L=SPB,ST=SPB,C=RU'
