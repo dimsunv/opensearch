@@ -29,6 +29,8 @@ services:
     ports:
       - 9200:9200
       - 9600:9600
+    networks:
+      - os-test
 
   os01:
     restart: always
@@ -55,6 +57,8 @@ services:
       - "./opensearch.yml:/usr/share/opensearch/config/opensearch.yml"
       - "os-data1:/usr/share/opensearch/data"
       - "./certs:/usr/share/opensearch/config/certificates:ro"
+    networks:
+      - os-test
 
   os02:
     restart: always
@@ -82,6 +86,8 @@ services:
       - "./opensearch.yml:/usr/share/opensearch/config/opensearch.yml"
       - "os-data2:/usr/share/opensearch/data"
       - "./certs:/usr/share/opensearch/config/certificates:ro"
+    networks:
+      - os-test
 
   os03:
     restart: always
@@ -109,6 +115,8 @@ services:
       - "./opensearch.yml:/usr/share/opensearch/config/opensearch.yml"
       - "os-data3:/usr/share/opensearch/data"
       - "./certs:/usr/share/opensearch/config/certificates:ro"
+    networks:
+      - os-test
 
   kibana:
     restart: always
@@ -121,6 +129,8 @@ services:
     environment:
       OPENSEARCH_HOSTS: '["https://os00:9200","https://os01:9200","https://os02:9200","https://os03:9200"]'
       DISABLE_INSTALL_DEMO_CONFIG: "true"
+    networks:
+      - os-test
 
   logstash:
     restart: always
@@ -131,9 +141,15 @@ services:
       - "./certs:/usr/share/logstash/config/certificates:ro"
     environment:
       OPENSEARCH_HOSTS: '["https://os00:9200"]'
+    networks:
+      - os-test
 
 volumes:
   os-data0:
   os-data1:
   os-data2:
   os-data3:
+
+networks:
+  os-test:
+   driver: bridge
