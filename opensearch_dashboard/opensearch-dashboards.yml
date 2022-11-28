@@ -1,7 +1,0 @@
----
-server.name: opensearch-dashboards
-server.host: "0.0.0.0"
-opensearch.username: "admin"
-opensearch.password: "admin"
-opensearch.ssl.verificationMode: none
-opensearch_security.cookie.secure: false
