@@ -22,13 +22,6 @@ openssl req -new -subj "$OPENDISTRO_DN/CN=os-dashboards" -key certs/os-dashboard
 openssl x509 -req -in certs/os-dashboards/os-dashboards.csr -CA certs/ca/ca.pem -CAkey certs/ca/ca.key -CAcreateserial -sha256 -out certs/os-dashboards/os-dashboards.pem
 rm certs/os-dashboards/os-dashboards-temp.key certs/os-dashboards/os-dashboards.csr
 
-# Logstash
-openssl genrsa -out certs/os_logstash/os_logstash-temp.key 2048
-openssl pkcs8 -inform PEM -outform PEM -in certs/os_logstash/os_logstash-temp.key -topk8 -nocrypt -v1 PBE-SHA1-3DES -out certs/os_logstash/os_logstash.key
-openssl req -new -subj "$OPENDISTRO_DN/CN=os_logstash" -key certs/os_logstash/os_logstash.key -out certs/os_logstash/os_logstash.csr
-openssl x509 -req -in certs/os_logstash/os_logstash.csr -CA certs/ca/ca.pem -CAkey certs/ca/ca.key -CAcreateserial -sha256 -out certs/os_logstash/os_logstash.pem
-rm certs/os_logstash/os_logstash-temp.key certs/os_logstash/os_logstash.csr
-
 # Nodes
 for NODE_NAME in "os00" "os01" "os02" "os03"
 do

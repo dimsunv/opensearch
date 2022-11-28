@@ -1,0 +1,11 @@
+---
+server.name: opensearch-dashboards
+server.host: "0.0.0.0"
+opensearch.username: "admin"
+opensearch.password: "admin"
+opensearch.requestHeadersAllowlist: ["securitytenant","Authorization"]
+opensearch_security.multitenancy.enabled: true
+opensearch_security.multitenancy.tenants.enable_global: true
+opensearch_security.multitenancy.tenants.enable_private: true
+opensearch_security.multitenancy.tenants.preferred: ["Private", "Global"]
+opensearch_security.multitenancy.enable_filter: false

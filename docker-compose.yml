@@ -10,10 +10,10 @@ services:
       node.roles: ''
       discovery.seed_hosts: os00,os01,os02,os03
       cluster.initial_master_nodes: os01
-      plugins.security.ssl.transport.pemkey_filepath: certificates/os00/os00.key
-      plugins.security.ssl.transport.pemcert_filepath: certificates/os00/os00.pem
-      plugins.security.ssl.http.pemkey_filepath: certificates/os00/os00.key
-      plugins.security.ssl.http.pemcert_filepath: certificates/os00/os00.pem
+      #plugins.security.ssl.transport.pemkey_filepath: certificates/os00/os00.key
+      #plugins.security.ssl.transport.pemcert_filepath: certificates/os00/os00.pem
+      #plugins.security.ssl.http.pemkey_filepath: certificates/os00/os00.key
+      #plugins.security.ssl.http.pemcert_filepath: certificates/os00/os00.pem
       DISABLE_INSTALL_DEMO_CONFIG: "true"
       JAVA_HOME: /usr/share/opensearch/jdk
       bootstrap.memory_lock: "true"
@@ -25,7 +25,7 @@ services:
     volumes:
       - "./opensearch.yml:/usr/share/opensearch/config/opensearch.yml"
       - "os-data0:/usr/share/opensearch/data"
-      - "./certs:/usr/share/opensearch/config/certificates:ro"
+      #- "./certs:/usr/share/opensearch/config/certificates:ro"
     ports:
       - 9200:9200
       - 9600:9600
@@ -41,10 +41,10 @@ services:
       node.roles: 'master'
       discovery.seed_hosts: os00,os01,os02,os03
       cluster.initial_master_nodes: os01
-      plugins.security.ssl.transport.pemkey_filepath: certificates/os01/os01.key
-      plugins.security.ssl.transport.pemcert_filepath: certificates/os01/os01.pem
-      plugins.security.ssl.http.pemkey_filepath: certificates/os01/os01.key
-      plugins.security.ssl.http.pemcert_filepath: certificates/os01/os01.pem
+      # plugins.security.ssl.transport.pemkey_filepath: certificates/os01/os01.key
+      # plugins.security.ssl.transport.pemcert_filepath: certificates/os01/os01.pem
+      # plugins.security.ssl.http.pemkey_filepath: certificates/os01/os01.key
+      # plugins.security.ssl.http.pemcert_filepath: certificates/os01/os01.pem
       DISABLE_INSTALL_DEMO_CONFIG: "true"
       JAVA_HOME: /usr/share/opensearch/jdk
       bootstrap.memory_lock: "true"
@@ -56,7 +56,7 @@ services:
     volumes:
       - "./opensearch.yml:/usr/share/opensearch/config/opensearch.yml"
       - "os-data1:/usr/share/opensearch/data"
-      - "./certs:/usr/share/opensearch/config/certificates:ro"
+      #- "./certs:/usr/share/opensearch/config/certificates:ro"
     networks:
       - os-test
 
@@ -70,10 +70,10 @@ services:
       node.attr.temp: hot
       discovery.seed_hosts: os00,os01,os02,os03
       cluster.initial_master_nodes: os01
-      plugins.security.ssl.transport.pemkey_filepath: certificates/os02/os02.key
-      plugins.security.ssl.transport.pemcert_filepath: certificates/os02/os02.pem
-      plugins.security.ssl.http.pemkey_filepath: certificates/os02/os02.key
-      plugins.security.ssl.http.pemcert_filepath: certificates/os02/os02.pem
+      # plugins.security.ssl.transport.pemkey_filepath: certificates/os02/os02.key
+      # plugins.security.ssl.transport.pemcert_filepath: certificates/os02/os02.pem
+      # plugins.security.ssl.http.pemkey_filepath: certificates/os02/os02.key
+      # plugins.security.ssl.http.pemcert_filepath: certificates/os02/os02.pem
       DISABLE_INSTALL_DEMO_CONFIG: "true"
       JAVA_HOME: /usr/share/opensearch/jdk
       bootstrap.memory_lock: "true"
@@ -85,7 +85,7 @@ services:
     volumes:
       - "./opensearch.yml:/usr/share/opensearch/config/opensearch.yml"
       - "os-data2:/usr/share/opensearch/data"
-      - "./certs:/usr/share/opensearch/config/certificates:ro"
+      #- "./certs:/usr/share/opensearch/config/certificates:ro"
     networks:
       - os-test
 
@@ -99,10 +99,10 @@ services:
       node.attr.temp: warm
       discovery.seed_hosts: os00,os01,os02,os03
       cluster.initial_master_nodes: os01
-      plugins.security.ssl.transport.pemkey_filepath: certificates/os03/os03.key
-      plugins.security.ssl.transport.pemcert_filepath: certificates/os03/os03.pem
-      plugins.security.ssl.http.pemkey_filepath: certificates/os03/os03.key
-      plugins.security.ssl.http.pemcert_filepath: certificates/os03/os03.pem
+      # plugins.security.ssl.transport.pemkey_filepath: certificates/os03/os03.key
+      # plugins.security.ssl.transport.pemcert_filepath: certificates/os03/os03.pem
+      # plugins.security.ssl.http.pemkey_filepath: certificates/os03/os03.key
+      # plugins.security.ssl.http.pemcert_filepath: certificates/os03/os03.pem
       DISABLE_INSTALL_DEMO_CONFIG: "true"
       JAVA_HOME: /usr/share/opensearch/jdk
       bootstrap.memory_lock: "true"
@@ -114,35 +114,36 @@ services:
     volumes:
       - "./opensearch.yml:/usr/share/opensearch/config/opensearch.yml"
       - "os-data3:/usr/share/opensearch/data"
-      - "./certs:/usr/share/opensearch/config/certificates:ro"
+      #- "./certs:/usr/share/opensearch/config/certificates:ro"
     networks:
       - os-test
 
   kibana:
     restart: always
-    image: opensearchproject/opensearch-dashboards:2.4.0
+    image: opensearchproject/opensearch-dashboards-no-secure
+    build: ./opensearch_dashboard
     ports:
       - 5601:5601
-    volumes:
-      - "./certs:/usr/share/opensearch-dashboards/config/certificates:ro"
-      - "./opensearch-dashboards.yml:/usr/share/opensearch-dashboards/config/opensearch_dashboards.yml"
+    #volumes:
+      #- "./certs:/usr/share/opensearch-dashboards/config/certificates:ro"
+      #- "./opensearch-dashboards.yml:/usr/share/opensearch-dashboards/config/opensearch_dashboards.yml"
     environment:
       OPENSEARCH_HOSTS: '["https://os00:9200","https://os01:9200","https://os02:9200","https://os03:9200"]'
       DISABLE_INSTALL_DEMO_CONFIG: "true"
     networks:
       - os-test
 
-  logstash:
-    restart: always
-    image: opensearchproject/logstash-oss-with-opensearch-output-plugin:8.4.0
-    volumes:
-      - "./logstash.yml:/usr/share/logstash/config/logstash.yml"
-      - "./logstash.conf:/usr/share/logstash/pipeline/logstash.conf"
-      - "./certs:/usr/share/logstash/config/certificates:ro"
-    environment:
-      OPENSEARCH_HOSTS: '["https://os00:9200"]'
-    networks:
-      - os-test
+  # logstash:
+  #   restart: always
+  #   image: opensearchproject/logstash-oss-with-opensearch-output-plugin:8.4.0
+  #   volumes:
+  #     - "./logstash.yml:/usr/share/logstash/config/logstash.yml"
+  #     - "./logstash.conf:/usr/share/logstash/pipeline/logstash.conf"
+  #     #- "./certs:/usr/share/logstash/config/certificates:ro"
+  #   environment:
+  #     OPENSEARCH_HOSTS: '["https://os01:9200"]'
+  #   networks:
+  #     - os-test
 
 volumes:
   os-data0:
