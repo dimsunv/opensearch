@@ -30,7 +30,7 @@ openssl x509 -req -in certs/os_logstash/os_logstash.csr -CA certs/ca/ca.pem -CAk
 rm certs/os_logstash/os_logstash-temp.key certs/os_logstash/os_logstash.csr
 
 # Nodes
-for NODE_NAME in "os01" "os02" "os03"
+for NODE_NAME in "os00" "os01" "os02" "os03"
 do
     mkdir "certs/${NODE_NAME}"
     openssl genrsa -out "certs/$NODE_NAME/$NODE_NAME-temp.key" 2048
